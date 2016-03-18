@@ -1,19 +1,19 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 # See https://github.com/phusion/baseimage-docker/issues/58
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 RUN apt-get update \
-    && apt-get install -y wget ipython build-essential python-dev python-pip openjdk-7-jdk \
+    && apt-get install -y wget ipython python-setuptools build-essential python-dev python-pip openjdk-7-jdk \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
 
 RUN pip install pymongo
 
-ENV SPARK_VERSION 1.5.2
+ENV SPARK_VERSION 1.6.1
 ENV HADOOP_VERSION 2.6
-ENV MONGO_HADOOP_VERSION 1.5.0
-ENV MONGO_HADOOP_COMMIT 9905150ec5f8f7b74bc998cc36f53d0a6f83ee49
+ENV MONGO_HADOOP_VERSION 1.5.1
+ENV MONGO_HADOOP_COMMIT r1.5.1
 
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 ENV SPARK_HOME /usr/local/spark
